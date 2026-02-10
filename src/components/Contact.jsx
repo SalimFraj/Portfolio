@@ -12,11 +12,6 @@ const contactLinks = [
         href: 'https://github.com/SalimFraj',
         icon: '💻',
     },
-    {
-        label: '+1 (438) 927-4993',
-        href: 'tel:+14389274993',
-        icon: '📱',
-    },
 ];
 
 const fadeInUp = {

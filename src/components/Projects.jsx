@@ -15,7 +15,7 @@ const projects = [
         desc: 'Full-stack restaurant platform with AI chatbot, secure JWT authentication, role-based access control, interactive dashboards, and multi-language support.',
         tags: ['React', 'Node.js', 'JWT Auth', 'Docker', 'REST API', 'i18n'],
         live: 'https://smart-restaurantvercel.vercel.app',
-        github: 'https://github.com/SalimFraj',
+        github: 'https://github.com/SalimFraj/smart-restaurant',
         image: '/smartrestaurant.png',
     },
 ];
