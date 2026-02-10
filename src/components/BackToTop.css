@@ -1,0 +1,27 @@
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 90;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: var(--blur-glass);
+    -webkit-backdrop-filter: var(--blur-glass);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.back-to-top:hover {
+    background: rgba(79, 143, 255, 0.2);
+    border-color: var(--accent-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(79, 143, 255, 0.3);
+}

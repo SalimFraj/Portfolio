@@ -1,0 +1,34 @@
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.loading-logo {
+    font-size: 3rem;
+    font-weight: 900;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loading-bar-track {
+    width: 200px;
+    height: 3px;
+    background: var(--bg-glass);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.loading-bar-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 100px;
+}

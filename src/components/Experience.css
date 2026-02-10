@@ -1,0 +1,164 @@
+.experience {
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.experience::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
+}
+
+.experience-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.experience-timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple), transparent);
+}
+
+.experience-item {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.experience-dot {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 0 20px rgba(79, 143, 255, 0.2);
+}
+
+.experience-card {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.experience-date {
+    font-size: var(--font-size-xs);
+    color: var(--accent-teal);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.experience-role {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.experience-company {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.experience-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.experience-bullets li {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.experience-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-purple);
+}
+
+.education-section {
+    margin-top: 3rem;
+}
+
+.education-card {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.education-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.education-info h3 {
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.education-info p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.education-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    background: rgba(6, 214, 160, 0.1);
+    color: var(--accent-teal);
+    border: 1px solid rgba(6, 214, 160, 0.2);
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .experience-timeline::before {
+        left: 15px;
+    }
+
+    .experience-dot {
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .experience-item {
+        gap: 1rem;
+    }
+}
