@@ -8,9 +8,9 @@ const experiences = [
         date: 'Sept 2024 — Present',
         icon: '🥷',
         bullets: [
-            'Provide technical support and troubleshooting to 50+ students, diagnosing issues across hardware and software environments.',
-            'Deliver training sessions and mentor junior instructors, building a collaborative learning culture.',
-            'Create documentation, onboarding guides, and curriculum materials that standardize teaching practices.',
+            'Assess progress data across 10+ concurrent learners and adapt instructional pacing based on individual performance patterns.',
+            'Communicate outcomes clearly to non-technical stakeholders (parents), translating technical progress into plain-language recommendations.',
+            'Maintain structured records of student milestones, curriculum completion rates, and learning outcomes across cohorts.',
         ],
     },
     {

@@ -1,5 +1,4 @@
-import { motion, useInView } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import './About.css';
 
 const skills = [
@@ -13,7 +12,7 @@ const skills = [
     },
     {
         category: 'AI & Data',
-        tags: ['Groq API', 'Data Pipelines', 'ETL', 'Recharts', 'REST APIs'],
+        tags: ['Groq API', 'Firebase Analytics', 'Recharts', 'REST APIs', 'SQL Reporting'],
     },
     {
         category: 'Security',
@@ -22,8 +21,9 @@ const skills = [
 ];
 
 const certifications = [
-    { name: 'Google Cybersecurity Analyst', icon: '🛡️' },
-    { name: 'Meta Front-End Development', icon: '⚛️' },
+    { name: 'CS50: Introduction to Computer Science — Harvard University (edX)', icon: '🎓' },
+    { name: 'Google Cybersecurity Analyst — Google (Coursera)', icon: '🛡️' },
+    { name: 'Meta Front-End Development — Meta (Coursera)', icon: '⚛️' },
 ];
 
 const languages = [
@@ -33,31 +33,7 @@ const languages = [
     { name: 'German', level: 'Advanced' },
 ];
 
-function CountUp({ target, suffix = '' }) {
-    const [count, setCount] = useState(0);
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: '-50px' });
 
-    useEffect(() => {
-        if (!isInView) return;
-        const duration = 1500;
-        const steps = 30;
-        const increment = target / steps;
-        let current = 0;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                setCount(target);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(current));
-            }
-        }, duration / steps);
-        return () => clearInterval(timer);
-    }, [isInView, target]);
-
-    return <span ref={ref}>{count}{suffix}</span>;
-}
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -78,37 +54,18 @@ export default function About() {
                 <div className="about-grid">
                     <motion.div className="about-text" {...fadeInUp} transition={{ duration: 0.6, delay: 0.2 }}>
                         <p>
-                            I'm a Software Development student at Bow Valley College (Dean's List)
-                            with a passion for building intelligent, user-focused applications. I specialize
-                            in full-stack web development with React and Node.js, and I love integrating
-                            AI to create smarter experiences.
-                        </p>
-                        <p>
-                            From AI-powered food assistants to secure restaurant platforms, I build
-                            applications that solve real problems. I'm also a Senior Coding Instructor,
-                            helping the next generation of developers grow.
+                            I started building software because I wanted to make things that actually work
+                            in the real world, not just pass tests. My projects are all deployed and in use:
+                            DinnerHelp is a live AI-powered PWA, Smart Restaurant is a full-stack platform
+                            with a real backend, and my capstone is a production ERP system I configured and
+                            delivered for a real client company. Outside of projects, I teach coding to
+                            students aged 7 to 14 at Code Ninjas in Calgary, which has made me unusually
+                            good at explaining technical concepts clearly. I'm fluent in four languages,
+                            which occasionally comes in handy. I'm currently looking for an internship or
+                            entry level role where I can contribute real work from day one.
                         </p>
 
-                        <div className="about-highlights">
-                            <div className="highlight-card glass-card">
-                                <div className="highlight-number">
-                                    <CountUp target={2} suffix="+" />
-                                </div>
-                                <div className="highlight-label">Production Apps</div>
-                            </div>
-                            <div className="highlight-card glass-card">
-                                <div className="highlight-number">
-                                    <CountUp target={4} />
-                                </div>
-                                <div className="highlight-label">Languages Spoken</div>
-                            </div>
-                            <div className="highlight-card glass-card">
-                                <div className="highlight-number">
-                                    <CountUp target={2} />
-                                </div>
-                                <div className="highlight-label">Certifications</div>
-                            </div>
-                        </div>
+
 
                         <div className="cert-list">
                             {certifications.map((cert) => (

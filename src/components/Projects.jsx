@@ -18,6 +18,15 @@ const projects = [
         github: 'https://github.com/SalimFraj/smart-restaurant',
         image: '/smartrestaurant.png',
     },
+    {
+        name: 'ERPNext Inventory & Production System',
+        desc: 'Production ERP system implemented for a real natural wellness company. Scoped and configured the full Stock and Manufacturing modules on ERPNext v15 \u2014 including item masters, warehouse hierarchies, batch tracking, and manufacturing BOMs. Handled client communication, requirements gathering, and delivered technical documentation and training materials for onboarding.',
+        tags: ['ERPNext v15', 'Frappe Cloud', 'SQL', 'Batch Tracking', 'Manufacturing', 'Client Delivery'],
+        live: null,
+        github: null,
+        image: '/ERPNext.png',
+        isPrivate: true,
+    },
 ];
 
 const fadeInUp = {
@@ -47,27 +56,35 @@ export default function Projects() {
                             transition={{ duration: 0.6, delay: i * 0.15 }}
                         >
                             <div className="project-image">
-                                <img
-                                    src={project.image}
-                                    alt={`${project.name} screenshot`}
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.parentElement.querySelector('.project-image-fallback').style.display = 'flex';
-                                    }}
-                                />
-                                <div className="project-image-fallback" style={{ display: 'none' }}>
+                                {project.image ? (
+                                    <img
+                                        src={project.image}
+                                        alt={`${project.name} screenshot`}
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.parentElement.querySelector('.project-image-fallback').style.display = 'flex';
+                                        }}
+                                    />
+                                ) : null}
+                                <div className="project-image-fallback" style={{ display: project.image ? 'none' : 'flex' }}>
                                     <span className="project-image-placeholder">
-                                        {project.name === 'DinnerHelp' ? '🍽️' : '🤖'}
+                                        {project.name === 'DinnerHelp' ? '🍽️' : project.name === 'Smart Restaurant' ? '🤖' : '🏭'}
                                     </span>
                                 </div>
-                                <div className="project-overlay">
-                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
-                                        Live Demo ↗
-                                    </a>
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
-                                        GitHub ↗
-                                    </a>
-                                </div>
+                                {project.isPrivate ? (
+                                    <div className="project-overlay project-overlay-private">
+                                        <span className="project-private-badge">Client Project — Private</span>
+                                    </div>
+                                ) : (
+                                    <div className="project-overlay">
+                                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
+                                            Live Demo ↗
+                                        </a>
+                                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
+                                            GitHub ↗
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                             <div className="project-info">
                                 <h3 className="project-name">{project.name}</h3>

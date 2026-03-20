@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import './Hero.css';
 
 const roles = [
-    'Software Developer',
-    'AI Enthusiast',
-    'Problem Solver',
-    'Full-Stack Builder',
+    'Full-Stack Developer',
+    'Data-Driven Builder',
+    'AI Integrations',
 ];
 
 export default function Hero() {
@@ -79,7 +78,9 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5 }}
                 >
-                    Building intelligent, full-stack applications that make a difference.
+                    Software Development student at Bow Valley College (Dean's List, graduating May 2026).
+                    I build and ship full-stack web apps — from AI-powered PWAs to ERP systems for real clients.
+                    Open to internship roles in software, data, or product engineering.
                 </motion.p>
 
                 <motion.div

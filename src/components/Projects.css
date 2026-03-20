@@ -128,6 +128,21 @@
     border: 1px solid rgba(79, 143, 255, 0.2);
 }
 
+.project-overlay-private {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.project-private-badge {
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    letter-spacing: 0.3px;
+}
+
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: 1fr;
