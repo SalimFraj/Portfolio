@@ -6,6 +6,7 @@ const roles = [
     'Full-Stack Developer',
     'Data-Driven Builder',
     'AI Integrations',
+    'Problem Solver',
 ];
 
 export default function Hero() {
@@ -78,8 +79,8 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5 }}
                 >
-                    Software Development student at Bow Valley College (Dean's List, graduating May 2026).
-                    I build and ship full-stack web apps — from AI-powered PWAs to ERP systems for real clients.
+                    Software Development student at Bow Valley College (Dean's List, graduating April 2026).
+                    I build and ship full-stack web apps, from AI-powered PWAs to ERP systems for real clients.
                     Open to internship roles in software, data, or product engineering.
                 </motion.p>
 
