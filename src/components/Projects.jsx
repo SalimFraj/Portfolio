@@ -4,7 +4,7 @@ import './Projects.css';
 const projects = [
     {
         name: 'Tiffany Bleu Beauty Lounge',
-        desc: 'Production website for a real beauty salon in Colwood, BC. Built with Next.js 15, Sanity CMS, ISR, and structured Schema.org JSON-LD. Features a headless CMS editorial workflow, dynamic service menu, gallery, FAQ, careers, and a Cloudflare-integrated contact form — all with a mobile-first responsive design, WCAG accessibility, and hardened HTTP security headers.',
+        desc: 'Production website for a real beauty salon in Colwood, BC. Built with Next.js 15, Sanity CMS, ISR, and structured Schema.org JSON-LD. Features a headless CMS editorial workflow, dynamic service menu, gallery, FAQ, careers, and a Cloudflare-integrated contact form - all with a mobile-first responsive design, WCAG accessibility, and hardened HTTP security headers.',
         tags: ['Next.js 15', 'TypeScript', 'Sanity CMS', 'React 19', 'ISR', 'Schema.org SEO'],
         live: 'https://www.tiffanybleu.ca',
         github: null,
@@ -29,7 +29,7 @@ const projects = [
     },
     {
         name: 'ERPNext Inventory & Production System',
-        desc: 'Production ERP system implemented for a real natural wellness company. Scoped and configured the full Stock and Manufacturing modules on ERPNext v15 \u2014 including item masters, warehouse hierarchies, batch tracking, and manufacturing BOMs. Handled client communication, requirements gathering, and delivered technical documentation and training materials for onboarding.',
+        desc: 'Production ERP system implemented for a real natural wellness company. Scoped and configured the full Stock and Manufacturing modules on ERPNext v15 - including item masters, warehouse hierarchies, batch tracking, and manufacturing BOMs. Handled client communication, requirements gathering, and delivered technical documentation and training materials for onboarding.',
         tags: ['ERPNext v15', 'Frappe Cloud', 'SQL', 'Batch Tracking', 'Manufacturing', 'Client Delivery'],
         live: null,
         github: null,
@@ -82,7 +82,7 @@ export default function Projects() {
                                 </div>
                                 {project.isPrivate && !project.live ? (
                                     <div className="project-overlay project-overlay-private">
-                                        <span className="project-private-badge">Client Project — Private</span>
+                                        <span className="project-private-badge">Client Project - Private</span>
                                     </div>
                                 ) : project.isPrivate && project.live ? (
                                     <div className="project-overlay">

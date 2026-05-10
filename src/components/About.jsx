@@ -21,9 +21,9 @@ const skills = [
 ];
 
 const certifications = [
-    { name: 'CS50: Introduction to Computer Science — Harvard University (edX)', icon: '🎓' },
-    { name: 'Google Cybersecurity Analyst — Google (Coursera)', icon: '🛡️' },
-    { name: 'Meta Front-End Development — Meta (Coursera)', icon: '⚛️' },
+    { name: 'CS50: Introduction to Computer Science - Harvard University (edX)', icon: '🎓' },
+    { name: 'Google Cybersecurity Analyst - Google (Coursera)', icon: '🛡️' },
+    { name: 'Meta Front-End Development - Meta (Coursera)', icon: '⚛️' },
 ];
 
 const languages = [

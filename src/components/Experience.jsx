@@ -5,7 +5,7 @@ const experiences = [
     {
         role: 'Senior Coding Instructor',
         company: 'Code Ninjas · Calgary, AB',
-        date: 'Sept 2024 — Present',
+        date: 'Sept 2024 - Present',
         icon: '🥷',
         bullets: [
             'Assess progress data across 10+ concurrent learners and adapt instructional pacing based on individual performance patterns.',
