@@ -3,6 +3,15 @@ import './Projects.css';
 
 const projects = [
     {
+        name: 'Tiffany Bleu Beauty Lounge',
+        desc: 'Production website for a real beauty salon in Colwood, BC. Built with Next.js 15, Sanity CMS, ISR, and structured Schema.org JSON-LD. Features a headless CMS editorial workflow, dynamic service menu, gallery, FAQ, careers, and a Cloudflare-integrated contact form — all with a mobile-first responsive design, WCAG accessibility, and hardened HTTP security headers.',
+        tags: ['Next.js 15', 'TypeScript', 'Sanity CMS', 'React 19', 'ISR', 'Schema.org SEO'],
+        live: 'https://www.tiffanybleu.ca',
+        github: null,
+        image: '/tiffanybleu.png',
+        isPrivate: true,
+    },
+    {
         name: 'DinnerHelp',
         desc: 'AI-powered Progressive Web App for meal planning, recipe suggestions, and pantry management. Features barcode scanning, receipt OCR, voice commands, and real-time multi-device sync.',
         tags: ['React 19', 'TypeScript', 'Firebase', 'Groq AI', 'Zustand', 'PWA'],
@@ -68,12 +77,19 @@ export default function Projects() {
                                 ) : null}
                                 <div className="project-image-fallback" style={{ display: project.image ? 'none' : 'flex' }}>
                                     <span className="project-image-placeholder">
-                                        {project.name === 'DinnerHelp' ? '🍽️' : project.name === 'Smart Restaurant' ? '🤖' : '🏭'}
+                                        {project.name === 'DinnerHelp' ? '🍽️' : project.name === 'Smart Restaurant' ? '🤖' : project.name === 'Tiffany Bleu Beauty Lounge' ? '💅' : '🏭'}
                                     </span>
                                 </div>
-                                {project.isPrivate ? (
+                                {project.isPrivate && !project.live ? (
                                     <div className="project-overlay project-overlay-private">
                                         <span className="project-private-badge">Client Project — Private</span>
+                                    </div>
+                                ) : project.isPrivate && project.live ? (
+                                    <div className="project-overlay">
+                                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
+                                            Live Site ↗
+                                        </a>
+                                        <span className="project-overlay-btn project-overlay-private-badge">Private Repo</span>
                                     </div>
                                 ) : (
                                     <div className="project-overlay">
