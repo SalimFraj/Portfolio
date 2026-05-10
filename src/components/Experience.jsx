@@ -77,7 +77,7 @@ export default function Experience() {
                                 Diploma in Software Development
                                 <span className="education-badge">Dean's List</span>
                             </h3>
-                            <p>Bow Valley College · Expected April 2026</p>
+                            <p>Bow Valley College · Graduated</p>
                         </div>
                     </div>
                 </motion.div>

@@ -50,7 +50,7 @@ export default function Hero() {
                     transition={{ duration: 0.6 }}
                 >
                     <span className="hero-badge-dot" />
-                    Open to Internship Opportunities
+                    Open to New Opportunities
                 </motion.div>
 
                 <motion.h1
@@ -79,9 +79,9 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5 }}
                 >
-                    Software Development student at Bow Valley College (Dean's List, graduated).
+                    Software Development graduate from Bow Valley College (Dean's List).
                     I build and ship full-stack web apps, from AI-powered PWAs to ERP systems for real clients.
-                    Open to internship roles in software, data, or product engineering.
+                    Open to full-time or junior roles in software, data, or product engineering.
                 </motion.p>
 
                 <motion.div

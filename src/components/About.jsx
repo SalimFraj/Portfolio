@@ -47,9 +47,7 @@ export default function About() {
         <section className="about" id="about">
             <div className="section-container">
                 <motion.h2 className="section-title" {...fadeInUp}>About Me</motion.h2>
-                <motion.p className="section-subtitle" {...fadeInUp} transition={{ duration: 0.6, delay: 0.1 }}>
-                    A passionate developer building real-world solutions
-                </motion.p>
+
 
                 <div className="about-grid">
                     <motion.div className="about-text" {...fadeInUp} transition={{ duration: 0.6, delay: 0.2 }}>
@@ -61,7 +59,7 @@ export default function About() {
                             delivered for a real client company. Outside of projects, I teach coding to
                             students aged 7 to 14 at Code Ninjas in Calgary, which has made me unusually
                             good at explaining technical concepts clearly. I'm fluent in four languages,
-                            which occasionally comes in handy. I'm currently looking for an internship or
+                            which occasionally comes in handy. I'm currently looking for a junior role or
                             entry level role where I can contribute real work from day one.
                         </p>
 

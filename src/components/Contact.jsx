@@ -29,7 +29,7 @@ export default function Contact() {
                     <div className="contact-content">
                         <motion.h2 className="section-title" {...fadeInUp}>Get In Touch</motion.h2>
                         <motion.p className="section-subtitle" {...fadeInUp} transition={{ duration: 0.6, delay: 0.1 }}>
-                            I'm actively seeking internship opportunities. Let's connect!
+                            I'm actively seeking full-time opportunities. Let's connect!
                         </motion.p>
 
                         <motion.div
