@@ -8,11 +8,11 @@ const skills = [
     },
     {
         category: 'Frameworks & Tools',
-        tags: ['React', 'Node.js', 'Firebase', 'Docker', 'Vite', 'Git'],
+        tags: ['React', 'Next.js', 'Node.js', 'Sanity CMS', 'Firebase', 'Docker', 'Vite', 'Git'],
     },
     {
         category: 'AI & Data',
-        tags: ['Groq API', 'Firebase Analytics', 'Recharts', 'REST APIs', 'SQL Reporting'],
+        tags: ['Groq API', 'Schema.org SEO', 'Firebase Analytics', 'Recharts', 'REST APIs', 'SQL Reporting'],
     },
     {
         category: 'Security',
@@ -54,8 +54,8 @@ export default function About() {
                         <p>
                             I started building software because I wanted to make things that actually work
                             in the real world, not just pass tests. My projects are all deployed and in use:
-                            DinnerHelp is a live AI-powered PWA, Smart Restaurant is a full-stack platform
-                            with a real backend, and my capstone is a production ERP system I configured and
+                            Tiffany Bleu is a production Next.js beauty salon site for a local client, DinnerHelp is a live AI-powered PWA,
+                            Smart Restaurant is a full-stack platform with a real backend, and my capstone is a production ERP system I configured and
                             delivered for a real client company. Outside of projects, I teach coding to
                             students aged 7 to 14 at Code Ninjas in Calgary, which has made me unusually
                             good at explaining technical concepts clearly. I'm fluent in four languages,
