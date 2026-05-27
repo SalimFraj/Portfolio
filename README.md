@@ -1,16 +1,25 @@
-# React + Vite
+# Salim Fraj Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site built with React and Vite.
 
-Currently, two official plugins are available:
+## Featured Projects
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **ConsultIQ** - AI Builder workbench and capability-factory demo for governed agentic workflows, eval coverage, human review gates, audit traces, and a downloadable Capability Candidate Packet.
+- **Tiffany Bleu Beauty Lounge** - Production website for a real salon with Next.js, Sanity CMS, structured SEO, accessibility, and security headers.
+- **DinnerHelp** - AI-powered PWA for meal planning, pantry management, barcode scanning, OCR, and multi-device sync.
+- **Smart Restaurant** - Full-stack restaurant platform with AI chatbot, JWT authentication, dashboards, and internationalization.
+- **ERPNext Inventory & Production System** - Real ERPNext implementation for stock and manufacturing workflows.
 
-## React Compiler
+## Local Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Validation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run lint
+npm run build
+```

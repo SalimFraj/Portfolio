@@ -32,8 +32,10 @@ export default function Hero() {
                     setDisplayText(displayText.slice(0, -1));
                 }, 40);
             } else {
-                setIsDeleting(false);
-                setRoleIndex((prev) => (prev + 1) % roles.length);
+                timeout = setTimeout(() => {
+                    setIsDeleting(false);
+                    setRoleIndex((prev) => (prev + 1) % roles.length);
+                }, 40);
             }
         }
 

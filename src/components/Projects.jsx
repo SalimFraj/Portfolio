@@ -3,6 +3,14 @@ import './Projects.css';
 
 const projects = [
     {
+        name: 'ConsultIQ',
+        desc: 'AI Builder workbench and capability-factory demo built for regulated enterprise workflows. It turns messy weekly status reporting into a governed agentic workflow with tool routing, deterministic eval coverage, human review gates, audit traces, and an exportable Capability Candidate Packet for stakeholder review.',
+        tags: ['Next.js 15', 'TypeScript', 'AI SDK', 'Agentic Workflows', 'Eval Harness', 'Governance'],
+        live: 'https://consultiq.vercel.app',
+        github: 'https://github.com/SalimFraj/consultiq',
+        image: '/consultiq.png',
+    },
+    {
         name: 'Tiffany Bleu Beauty Lounge',
         desc: 'Production website for a real beauty salon in Colwood, BC. Built with Next.js 15, Sanity CMS, ISR, and structured Schema.org JSON-LD. Features a headless CMS editorial workflow, dynamic service menu, gallery, FAQ, careers, and a Cloudflare-integrated contact form - all with a mobile-first responsive design, WCAG accessibility, and hardened HTTP security headers.',
         tags: ['Next.js 15', 'TypeScript', 'Sanity CMS', 'React 19', 'ISR', 'Schema.org SEO'],
