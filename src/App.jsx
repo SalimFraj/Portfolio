@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
 import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -50,6 +51,7 @@ function App() {
                     <BackToTop />
                 </motion.div>
             )}
+            <Analytics />
         </>
     )
 }
