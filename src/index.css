@@ -2,27 +2,28 @@
 
 :root {
   /* Colors */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
+  --bg-primary: #080a0c;
+  --bg-secondary: #101311;
   --bg-card: rgba(255, 255, 255, 0.04);
   --bg-card-hover: rgba(255, 255, 255, 0.08);
   --bg-glass: rgba(255, 255, 255, 0.06);
   --border-glass: rgba(255, 255, 255, 0.1);
   --border-glass-hover: rgba(255, 255, 255, 0.2);
 
-  --text-primary: #f0f0f5;
-  --text-secondary: #8888a0;
-  --text-tertiary: #5a5a72;
+  --text-primary: #f5f4ec;
+  --text-secondary: #aaa89c;
+  --text-tertiary: #727066;
 
-  --accent-blue: #4f8fff;
-  --accent-purple: #a855f7;
-  --accent-teal: #06d6a0;
-  --accent-pink: #f472b6;
+  --accent-blue: #72d7ff;
+  --accent-purple: #b99cff;
+  --accent-teal: #4be0b4;
+  --accent-pink: #ff8bb5;
+  --accent-citrus: #c9f25b;
+  --accent-amber: #ffc857;
 
-  --gradient-primary: linear-gradient(135deg, #4f8fff 0%, #a855f7 50%, #06d6a0 100%);
-  --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #1a1040 40%, #0a2540 70%, #0a0a0f 100%);
-  --gradient-text: linear-gradient(135deg, #4f8fff, #a855f7, #06d6a0);
-  --gradient-card: linear-gradient(135deg, rgba(79, 143, 255, 0.1), rgba(168, 85, 247, 0.05));
+  --gradient-primary: linear-gradient(135deg, #c9f25b 0%, #4be0b4 52%, #72d7ff 100%);
+  --gradient-text: linear-gradient(135deg, #f5f4ec, #c9f25b 48%, #72d7ff);
+  --gradient-card: linear-gradient(135deg, rgba(201, 242, 91, 0.12), rgba(114, 215, 255, 0.06));
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -39,7 +40,7 @@
 
   /* Spacing */
   --section-padding: 6rem 2rem;
-  --container-max: 1100px;
+  --container-max: 1180px;
 
   /* Effects */
   --blur-glass: blur(20px);
@@ -67,7 +68,9 @@ html {
 
 body {
   font-family: var(--font-family);
-  background-color: var(--bg-primary);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(201, 242, 91, 0.08), transparent 28%),
+    var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -115,13 +118,11 @@ a:hover {
 }
 
 .section-title {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-4xl);
   font-weight: 800;
   margin-bottom: 0.5rem;
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  letter-spacing: 0;
 }
 
 .section-subtitle {
@@ -129,6 +130,15 @@ a:hover {
   color: var(--text-secondary);
   margin-bottom: 3rem;
   max-width: 600px;
+}
+
+.section-kicker {
+  color: var(--accent-citrus);
+  font-size: var(--font-size-xs);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
 }
 
 .gradient-text {
@@ -142,7 +152,7 @@ a:hover {
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   backdrop-filter: var(--blur-glass);
   -webkit-backdrop-filter: var(--blur-glass);
   transition: var(--transition);
@@ -164,9 +174,10 @@ a:hover {
   content: '';
   position: absolute;
   inset: -1px;
-  border-radius: var(--radius-lg);
+  pointer-events: none;
+  border-radius: var(--radius-sm);
   padding: 1px;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-teal), var(--accent-blue));
+  background: linear-gradient(135deg, var(--accent-citrus), var(--accent-teal), var(--accent-blue), var(--accent-amber));
   background-size: 300% 300%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -190,5 +201,22 @@ a:hover {
 
   50% {
     background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-container {
+    padding: 4.5rem 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    line-height: 1.08;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
   }
 }

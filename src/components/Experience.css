@@ -41,15 +41,17 @@
     min-width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: var(--bg-primary);
-    border: 2px solid var(--accent-blue);
+    background: #0f1512;
+    border: 2px solid var(--accent-citrus);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    color: var(--accent-citrus);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
     z-index: 1;
     position: relative;
-    box-shadow: 0 0 20px rgba(79, 143, 255, 0.2);
+    box-shadow: 0 0 20px rgba(201, 242, 91, 0.18);
 }
 
 .experience-card {
@@ -59,7 +61,7 @@
 
 .experience-date {
     font-size: var(--font-size-xs);
-    color: var(--accent-teal);
+    color: var(--accent-citrus);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 600;
@@ -119,7 +121,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    color: #08100c;
+    font-size: var(--font-size-sm);
+    font-weight: 900;
     flex-shrink: 0;
 }
 
@@ -137,7 +141,7 @@
 .education-badge {
     display: inline-block;
     padding: 0.2rem 0.6rem;
-    border-radius: 100px;
+    border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
     font-weight: 600;
     background: rgba(6, 214, 160, 0.1);

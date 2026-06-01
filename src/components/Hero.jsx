@@ -1,109 +1,85 @@
+import { Suspense, lazy, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import './Hero.css';
 
-const roles = [
-    'Full-Stack Developer',
-    'Data-Driven Builder',
-    'AI Integrations',
-    'Problem Solver',
-];
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 export default function Hero() {
-    const [roleIndex, setRoleIndex] = useState(0);
-    const [displayText, setDisplayText] = useState('');
-    const [isDeleting, setIsDeleting] = useState(false);
+    const handleHeroPointerMove = useCallback((event) => {
+        if (!event.isTrusted) return;
 
-    useEffect(() => {
-        const currentRole = roles[roleIndex];
-        let timeout;
+        const canvas = event.currentTarget.querySelector('.hero-spline-stage canvas');
+        if (!canvas || event.target === canvas) return;
 
-        if (!isDeleting) {
-            if (displayText.length < currentRole.length) {
-                timeout = setTimeout(() => {
-                    setDisplayText(currentRole.slice(0, displayText.length + 1));
-                }, 80);
-            } else {
-                timeout = setTimeout(() => setIsDeleting(true), 2000);
-            }
-        } else {
-            if (displayText.length > 0) {
-                timeout = setTimeout(() => {
-                    setDisplayText(displayText.slice(0, -1));
-                }, 40);
-            } else {
-                timeout = setTimeout(() => {
-                    setIsDeleting(false);
-                    setRoleIndex((prev) => (prev + 1) % roles.length);
-                }, 40);
-            }
-        }
+        const pointerMove = new PointerEvent('pointermove', {
+            bubbles: true,
+            pointerId: event.pointerId,
+            pointerType: event.pointerType || 'mouse',
+            clientX: event.clientX,
+            clientY: event.clientY,
+            screenX: event.screenX,
+            screenY: event.screenY,
+        });
 
-        return () => clearTimeout(timeout);
-    }, [displayText, isDeleting, roleIndex]);
+        const mouseMove = new MouseEvent('mousemove', {
+            bubbles: true,
+            clientX: event.clientX,
+            clientY: event.clientY,
+            screenX: event.screenX,
+            screenY: event.screenY,
+        });
+
+        canvas.dispatchEvent(pointerMove);
+        canvas.dispatchEvent(mouseMove);
+    }, []);
 
     return (
-        <section className="hero" id="hero">
-            <div className="hero-content">
-                <motion.div
-                    className="hero-badge"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <span className="hero-badge-dot" />
-                    Open to New Opportunities
-                </motion.div>
-
-                <motion.h1
-                    className="hero-name"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                >
-                    Hi, I'm{' '}
-                    <span className="hero-name-gradient">Salim Fraj</span>
-                </motion.h1>
-
-                <motion.div
-                    className="hero-typing"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.4 }}
-                >
-                    <span className="typing-text">{displayText}</span>
-                    <span className="typing-cursor">|</span>
-                </motion.div>
-
-                <motion.p
-                    className="hero-tagline"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.5 }}
-                >
-                    Software Development graduate from Bow Valley College (Dean's List).
-                    I build and ship full-stack web apps, from AI-powered PWAs to ERP systems for real clients.
-                    Open to full-time or junior roles in software, data, or product engineering.
-                </motion.p>
-
-                <motion.div
-                    className="hero-buttons"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.6 }}
-                >
-                    <a href="#projects" className="btn btn-primary">
-                        View Projects ↓
-                    </a>
-                    <a href="#contact" className="btn btn-secondary">
-                        Get In Touch
-                    </a>
-                </motion.div>
+        <section className="hero" id="hero" onPointerMove={handleHeroPointerMove}>
+            <div className="hero-background" aria-hidden="true">
+                <div className="hero-grid-lines" />
+                <div className="hero-animated-band hero-animated-band-one" />
+                <div className="hero-animated-band hero-animated-band-two" />
             </div>
 
-            <div className="hero-scroll">
-                <span>Scroll</span>
-                <div className="scroll-line" />
+            <div className="hero-spline-stage" aria-hidden="true">
+                <Suspense fallback={<div className="spline-fallback" />}>
+                    <Spline
+                        scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                        className="spline-scene"
+                    />
+                </Suspense>
+            </div>
+
+            <div className="hero-content">
+                <motion.div
+                    className="hero-copy"
+                    initial={{ opacity: 0, y: 22 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.65 }}
+                >
+                    <div className="hero-eyebrow">Salim Fraj / Full-stack software developer</div>
+                    <h1 className="hero-name">
+                        <span>I turn messy</span>
+                        <span>workflows into</span>
+                        <span>shipped software.</span>
+                    </h1>
+                    <p className="hero-tagline">
+                        AI workbenches, client CMS sites, ERP workflows, and full-stack apps
+                        built with proof, handoff, and fallback paths.
+                    </p>
+
+                    <div className="hero-buttons">
+                        <a href="#projects" className="btn btn-primary">
+                            See shipped work
+                        </a>
+                        <a href="/Salim-Fraj-Resume.pdf" className="btn btn-secondary" download>
+                            Download resume
+                        </a>
+                        <a href="https://ca.linkedin.com/in/salim-fraj-a540932a7" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                            LinkedIn
+                        </a>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

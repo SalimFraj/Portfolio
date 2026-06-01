@@ -1,5 +1,7 @@
 .about {
-    background: var(--bg-secondary);
+    background:
+        linear-gradient(180deg, var(--bg-primary), var(--bg-secondary) 42%, var(--bg-primary)),
+        radial-gradient(circle at 90% 10%, rgba(201, 242, 91, 0.08), transparent 30%);
     position: relative;
 }
 
@@ -13,55 +15,123 @@
     background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
 }
 
+.about-heading {
+    max-width: 740px;
+}
+
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 3rem;
     align-items: start;
 }
 
 .about-text p {
     color: var(--text-secondary);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     line-height: 1.8;
     margin-bottom: 1.5rem;
 }
 
-.about-highlights {
+.about-principles {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.75rem 0;
+}
+
+.principle-item {
     display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.035);
 }
 
-.highlight-card {
-    flex: 1;
-    min-width: 120px;
-    text-align: center;
-    padding: 1.25rem;
+.principle-item span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent-citrus);
+    box-shadow: 0 0 16px rgba(201, 242, 91, 0.45);
+    flex: 0 0 auto;
+    margin-top: 0.45rem;
 }
 
-.highlight-number {
-    font-size: var(--font-size-3xl);
-    font-weight: 800;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.principle-item strong,
+.principle-item p {
+    display: block;
 }
 
-.highlight-label {
-    font-size: var(--font-size-xs);
+.principle-item strong {
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.15rem;
+}
+
+.principle-item p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.proof-scoreboard {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.proof-score {
+    padding: 0.85rem;
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.proof-score strong,
+.proof-score span,
+.proof-score p {
+    display: block;
+}
+
+.proof-score strong {
+    color: var(--accent-citrus);
+    font-size: var(--font-size-2xl);
+    line-height: 1;
+}
+
+.proof-score span {
+    margin-top: 0.4rem;
     color: var(--text-tertiary);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 0.25rem;
+    letter-spacing: 0.06em;
+}
+
+.proof-score p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.5;
+    margin: 0.45rem 0 0;
 }
 
 .skills-section {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
+}
+
+.skill-category {
+    padding: 1.1rem;
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.035);
 }
 
 .skill-category h3 {
@@ -81,7 +151,7 @@
 
 .skill-tag {
     padding: 0.4rem 0.9rem;
-    border-radius: 100px;
+    border-radius: var(--radius-sm);
     font-size: var(--font-size-xs);
     font-weight: 500;
     background: var(--bg-glass);
@@ -120,7 +190,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    color: #08100c;
+    font-size: 12px;
+    font-weight: 800;
     flex-shrink: 0;
 }
 
@@ -136,7 +208,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border-radius: 100px;
+    border-radius: var(--radius-sm);
     background: var(--bg-glass);
     border: 1px solid var(--border-glass);
     font-size: var(--font-size-xs);
@@ -153,7 +225,11 @@
         grid-template-columns: 1fr;
     }
 
-    .about-highlights {
-        justify-content: center;
+    .skills-section {
+        grid-template-columns: 1fr;
+    }
+
+    .proof-scoreboard {
+        grid-template-columns: 1fr;
     }
 }

@@ -3,27 +3,27 @@ import './About.css';
 
 const skills = [
     {
-        category: 'Languages',
+        category: 'Build',
         tags: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'HTML/CSS'],
     },
     {
-        category: 'Frameworks & Tools',
+        category: 'Ship',
         tags: ['React', 'Next.js', 'Node.js', 'Sanity CMS', 'Firebase', 'Docker', 'Vite', 'Git'],
     },
     {
         category: 'AI & Data',
-        tags: ['Groq API', 'Schema.org SEO', 'Firebase Analytics', 'Recharts', 'REST APIs', 'SQL Reporting'],
+        tags: ['Groq API', 'AI Workflows', 'Schema.org SEO', 'Firebase Analytics', 'REST APIs', 'SQL Reporting'],
     },
     {
-        category: 'Security',
+        category: 'Operate',
         tags: ['Firewalls', 'IDS/IPS', 'Active Directory', 'JWT Auth', 'RBAC'],
     },
 ];
 
 const certifications = [
-    { name: 'CS50: Introduction to Computer Science - Harvard University (edX)', icon: '🎓' },
-    { name: 'Google Cybersecurity Analyst - Google (Coursera)', icon: '🛡️' },
-    { name: 'Meta Front-End Development - Meta (Coursera)', icon: '⚛️' },
+    { name: 'CS50: Introduction to Computer Science - Harvard University (edX)', icon: 'CS' },
+    { name: 'Google Cybersecurity Analyst - Google (Coursera)', icon: 'CY' },
+    { name: 'Meta Front-End Development - Meta (Coursera)', icon: 'FE' },
 ];
 
 const languages = [
@@ -33,7 +33,29 @@ const languages = [
     { name: 'German', level: 'Advanced' },
 ];
 
+const principles = [
+    { label: 'Understand', text: 'Start with the workflow before choosing the technology.' },
+    { label: 'Ship', text: 'Build usable versions with fallback paths and clear constraints.' },
+    { label: 'Explain', text: 'Make technical systems clear to clients, teammates, and reviewers.' },
+];
 
+const proofSignals = [
+    {
+        label: 'Shipped systems',
+        value: '5',
+        text: 'Live apps, a production client site, and an ERP implementation.',
+    },
+    {
+        label: 'Client-facing builds',
+        value: '3',
+        text: 'CMS delivery, ERP onboarding, and curriculum handoff work.',
+    },
+    {
+        label: 'Working languages',
+        value: '4',
+        text: 'English, French, Arabic, and German for support-heavy teams.',
+    },
+];
 
 const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -46,24 +68,42 @@ export default function About() {
     return (
         <section className="about" id="about">
             <div className="section-container">
-                <motion.h2 className="section-title" {...fadeInUp}>About Me</motion.h2>
-
+                <motion.div className="about-heading" {...fadeInUp}>
+                    <p className="section-kicker">About</p>
+                    <h2 className="section-title">I build software for real users and real workflows.</h2>
+                </motion.div>
 
                 <div className="about-grid">
                     <motion.div className="about-text" {...fadeInUp} transition={{ duration: 0.6, delay: 0.2 }}>
                         <p>
-                            I started building software because I wanted to make things that actually work
-                            in the real world, not just pass tests. My projects are all deployed and in use:
-                            Tiffany Bleu is a production Next.js beauty salon site for a local client, DinnerHelp is a live AI-powered PWA,
-                            Smart Restaurant is a full-stack platform with a real backend, and my capstone is a production ERP system I configured and
-                            delivered for a real client company. Outside of projects, I teach coding to
-                            students aged 7 to 14 at Code Ninjas in Calgary, which has made me unusually
-                            good at explaining technical concepts clearly. I'm fluent in four languages,
-                            which occasionally comes in handy. I'm currently looking for a junior role or
-                            entry level role where I can contribute real work from day one.
+                            I build software that has to work for real users, clients, and business processes.
+                            My strongest projects combine full-stack engineering, AI-assisted workflows, and
+                            operational systems: ConsultIQ for governed AI workflow design, Tiffany Bleu for a
+                            production client CMS site, DinnerHelp for a consumer AI PWA, Smart Restaurant for
+                            backend and dashboard work, and ERPNext for inventory and manufacturing operations.
                         </p>
 
+                        <div className="about-principles">
+                            {principles.map((principle) => (
+                                <div className="principle-item" key={principle.label}>
+                                    <span />
+                                    <div>
+                                        <strong>{principle.label}</strong>
+                                        <p>{principle.text}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
+                        <div className="proof-scoreboard glass-card">
+                            {proofSignals.map((signal) => (
+                                <div className="proof-score" key={signal.label}>
+                                    <strong>{signal.value}</strong>
+                                    <span>{signal.label}</span>
+                                    <p>{signal.text}</p>
+                                </div>
+                            ))}
+                        </div>
 
                         <div className="cert-list">
                             {certifications.map((cert) => (
