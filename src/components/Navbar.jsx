@@ -14,8 +14,23 @@ export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
+        let ticking = false;
+
+        const updateScrolledState = () => {
+            ticking = false;
+            const nextScrolled = window.scrollY > 50;
+            setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
+        };
+
+        const handleScroll = () => {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateScrolledState);
+            }
+        };
+
+        updateScrolledState();
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 

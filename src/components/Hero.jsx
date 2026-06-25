@@ -1,10 +1,64 @@
-import { Suspense, lazy, useCallback } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
+const SPLINE_DESKTOP_QUERY = '(min-width: 1024px) and (hover: hover) and (pointer: fine)';
+const SLOW_CONNECTION_TYPES = new Set(['slow-2g', '2g']);
+const SPLINE_START_DELAY = 500;
 
 export default function Hero() {
+    const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+
+    useEffect(() => {
+        const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const desktopQuery = window.matchMedia(SPLINE_DESKTOP_QUERY);
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        let idleCallback;
+        let timeoutId;
+        let delayId;
+
+        const canLoadSpline = () => (
+            desktopQuery.matches
+            && !reducedMotionQuery.matches
+            && !connection?.saveData
+            && !SLOW_CONNECTION_TYPES.has(connection?.effectiveType)
+        );
+
+        const clearPendingLoad = () => {
+            if (idleCallback) window.cancelIdleCallback?.(idleCallback);
+            if (timeoutId) window.clearTimeout(timeoutId);
+            if (delayId) window.clearTimeout(delayId);
+            idleCallback = undefined;
+            timeoutId = undefined;
+            delayId = undefined;
+        };
+
+        const scheduleSplineLoad = () => {
+            clearPendingLoad();
+            if (!canLoadSpline()) return;
+
+            const loadSpline = () => {
+                if (canLoadSpline()) setShouldLoadSpline(true);
+            };
+
+            delayId = window.setTimeout(() => {
+                idleCallback = window.requestIdleCallback?.(loadSpline, { timeout: 2200 });
+                if (!idleCallback) timeoutId = window.setTimeout(loadSpline, 800);
+            }, SPLINE_START_DELAY);
+        };
+
+        scheduleSplineLoad();
+        desktopQuery.addEventListener('change', scheduleSplineLoad);
+        reducedMotionQuery.addEventListener('change', scheduleSplineLoad);
+
+        return () => {
+            clearPendingLoad();
+            desktopQuery.removeEventListener('change', scheduleSplineLoad);
+            reducedMotionQuery.removeEventListener('change', scheduleSplineLoad);
+        };
+    }, []);
+
     const handleHeroPointerMove = useCallback((event) => {
         if (!event.isTrusted) return;
 
@@ -34,7 +88,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="hero" id="hero" onPointerMove={handleHeroPointerMove}>
+        <section className="hero" id="hero" onPointerMove={shouldLoadSpline ? handleHeroPointerMove : undefined}>
             <div className="hero-background" aria-hidden="true">
                 <div className="hero-grid-lines" />
                 <div className="hero-animated-band hero-animated-band-one" />
@@ -42,12 +96,16 @@ export default function Hero() {
             </div>
 
             <div className="hero-spline-stage" aria-hidden="true">
-                <Suspense fallback={<div className="spline-fallback" />}>
-                    <Spline
-                        scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                        className="spline-scene"
-                    />
-                </Suspense>
+                {shouldLoadSpline ? (
+                    <Suspense fallback={<div className="spline-fallback" />}>
+                        <Spline
+                            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                            className="spline-scene"
+                        />
+                    </Suspense>
+                ) : (
+                    <div className="spline-fallback" />
+                )}
             </div>
 
             <div className="hero-content">

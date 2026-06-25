@@ -6,17 +6,28 @@ export default function BackToTop() {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
+        let ticking = false;
+
+        const updateVisibility = () => {
+            ticking = false;
             const threshold = window.innerWidth <= 640 ? 4200 : 1200;
-            setVisible(window.scrollY > threshold);
+            const nextVisible = window.scrollY > threshold;
+            setVisible((current) => (current === nextVisible ? current : nextVisible));
         };
 
-        handleScroll();
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
+        const scheduleUpdate = () => {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateVisibility);
+            }
+        };
+
+        updateVisibility();
+        window.addEventListener('scroll', scheduleUpdate, { passive: true });
+        window.addEventListener('resize', scheduleUpdate);
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleScroll);
+            window.removeEventListener('scroll', scheduleUpdate);
+            window.removeEventListener('resize', scheduleUpdate);
         };
     }, []);
 
