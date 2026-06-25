@@ -173,6 +173,10 @@
     flex-direction: column;
 }
 
+.project-card:not(.project-card-featured) {
+    display: none;
+}
+
 .project-card-active {
     border-color: rgba(201, 242, 91, 0.28);
     box-shadow: 0 18px 60px rgba(201, 242, 91, 0.075);
@@ -579,10 +583,6 @@
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 1.25rem;
-    }
-
-    .project-card:not(.project-card-featured) {
-        display: none;
     }
 
     .project-card-featured {
