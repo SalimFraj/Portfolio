@@ -159,201 +159,6 @@
     line-height: 1.55;
 }
 
-.consult-theater {
-    margin-bottom: 2rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.55fr);
-    gap: 1rem;
-    align-items: stretch;
-}
-
-.consult-device {
-    height: clamp(420px, 42vw, 560px);
-    min-height: 420px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-sm);
-    background:
-        linear-gradient(135deg, rgba(201, 242, 91, 0.08), rgba(114, 215, 255, 0.045)),
-        #050706;
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.32);
-}
-
-.consult-device-bar {
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.consult-device-bar span {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.consult-device-bar span:first-child {
-    background: var(--accent-pink);
-}
-
-.consult-device-bar span:nth-child(2) {
-    background: var(--accent-amber);
-}
-
-.consult-device-bar span:nth-child(3) {
-    background: var(--accent-teal);
-}
-
-.consult-device-screen {
-    height: calc(100% - 38px);
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.consult-device-screen img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    animation: consultScroll 12s ease-in-out infinite alternate;
-}
-
-.consult-scanline {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg, transparent, rgba(201, 242, 91, 0.15), transparent);
-    transform: translateY(-100%);
-    animation: consultScan 4.8s ease-in-out infinite;
-}
-
-@keyframes consultScroll {
-    from {
-        transform: translateY(0) scale(1.01);
-    }
-
-    to {
-        transform: translateY(-8%) scale(1.01);
-    }
-}
-
-@keyframes consultScan {
-    0%,
-    18% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    40%,
-    62% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-
-.consult-stage-panel {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.25rem;
-}
-
-.consult-stage-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.consult-stage-header span {
-    color: var(--accent-citrus);
-    font-size: var(--font-size-xs);
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.consult-stage-header code {
-    color: var(--text-tertiary);
-    font-family: var(--font-family);
-    font-size: var(--font-size-xs);
-    font-weight: 850;
-}
-
-.consult-stage-copy p {
-    color: var(--accent-blue);
-    font-size: var(--font-size-xs);
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.45rem;
-    text-transform: uppercase;
-}
-
-.consult-stage-copy h3 {
-    color: var(--text-primary);
-    font-size: var(--font-size-2xl);
-    line-height: 1.12;
-    margin-bottom: 0.65rem;
-}
-
-.consult-stage-copy span {
-    color: var(--text-secondary);
-    font-size: var(--font-size-sm);
-    line-height: 1.7;
-}
-
-.consult-stage-steps {
-    display: grid;
-    gap: 0.55rem;
-}
-
-.consult-stage-step {
-    min-height: 58px;
-    display: grid;
-    gap: 0.1rem;
-    padding: 0.7rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.035);
-    color: var(--text-secondary);
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.consult-stage-step span {
-    color: var(--text-primary);
-    font-size: var(--font-size-sm);
-    font-weight: 850;
-}
-
-.consult-stage-step small {
-    color: var(--text-tertiary);
-    font-size: var(--font-size-xs);
-    font-weight: 800;
-}
-
-.consult-stage-step:hover,
-.consult-stage-step:focus-visible,
-.consult-stage-step-active {
-    outline: none;
-    border-color: rgba(114, 215, 255, 0.3);
-    background:
-        linear-gradient(135deg, rgba(114, 215, 255, 0.1), rgba(201, 242, 91, 0.045)),
-        rgba(255, 255, 255, 0.055);
-}
-
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -747,8 +552,7 @@
 
 @media (max-width: 768px) {
     .project-dossier,
-    .project-dossier-preview,
-    .consult-theater {
+    .project-dossier-preview {
         grid-template-columns: 1fr;
     }
 
@@ -772,9 +576,12 @@
         height: 260px;
         min-height: 260px;
     }
-
-    .consult-theater,
     .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .project-card:not(.project-card-featured) {
         display: none;
     }
 

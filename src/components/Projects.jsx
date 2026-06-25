@@ -96,33 +96,6 @@ const fadeInUp = {
     transition: { duration: 0.6 },
 };
 
-const consultStages = [
-    {
-        label: 'Prompt',
-        title: 'Messy update enters the system',
-        text: 'Raw notes, blockers, owners, and client expectations land in one workbench instead of scattered docs.',
-        meta: 'source packet',
-    },
-    {
-        label: 'Route',
-        title: 'Local tools answer first',
-        text: 'The workflow routes to deterministic lookup and compliance logic before model synthesis gets involved.',
-        meta: 'tool routed',
-    },
-    {
-        label: 'Review',
-        title: 'Risky output is gated',
-        text: 'Client-facing compliance content is marked for human review, with visible status instead of silent automation.',
-        meta: 'review required',
-    },
-    {
-        label: 'Packet',
-        title: 'Proof is packaged',
-        text: 'The final brief exports with traceable decisions, fallback behavior, and a stakeholder-ready explanation.',
-        meta: 'handoff ready',
-    },
-];
-
 function ProjectActions({ project, compact = false }) {
     return (
         <div className={`project-actions ${compact ? 'project-actions-compact' : ''}`} aria-label={`${project.name} links`}>
@@ -222,57 +195,6 @@ function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) 
         </motion.div>
     );
 }
-function ConsultTheater() {
-    const [activeStage, setActiveStage] = useState(0);
-    const stage = consultStages[activeStage];
-
-    return (
-        <div className="consult-theater">
-            <div className="consult-device">
-                <div className="consult-device-bar">
-                    <span />
-                    <span />
-                    <span />
-                </div>
-                <div className="consult-device-screen">
-                    <img src="/consultiq.png" alt="ConsultIQ workflow screen" />
-                    <div className="consult-scanline" aria-hidden="true" />
-                </div>
-            </div>
-
-            <div className="consult-stage-panel glass-card" id="consultiq-stage-panel" role="region" aria-live="polite" aria-label="Active ConsultIQ workflow stage">
-                <div className="consult-stage-header">
-                    <span>ConsultIQ flow</span>
-                    <code>{stage.meta}</code>
-                </div>
-
-                <div className="consult-stage-copy">
-                    <p>{stage.label}</p>
-                    <h3>{stage.title}</h3>
-                    <span>{stage.text}</span>
-                </div>
-
-                <div className="consult-stage-steps" aria-label="ConsultIQ workflow stages">
-                    {consultStages.map((item, index) => (
-                        <button
-                            className={`consult-stage-step ${activeStage === index ? 'consult-stage-step-active' : ''}`}
-                            type="button"
-                            key={item.label}
-                            aria-pressed={activeStage === index}
-                            aria-controls="consultiq-stage-panel"
-                            onClick={() => setActiveStage(index)}
-                            onMouseEnter={() => setActiveStage(index)}
-                        >
-                            <span>{item.label}</span>
-                            <small>{item.meta}</small>
-                        </button>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-}
-
 export default function Projects() {
     const [activeProject, setActiveProject] = useState(0);
     const selectedProject = projects[activeProject];
@@ -291,8 +213,6 @@ export default function Projects() {
                     selectedProject={selectedProject}
                     onSelect={setActiveProject}
                 />
-
-                <ConsultTheater />
 
                 <div className="projects-grid">
                     {projects.map((project, i) => (
