@@ -5,7 +5,7 @@ import './Hero.css';
 const Spline = lazy(() => import('@splinetool/react-spline'));
 const SPLINE_DESKTOP_QUERY = '(min-width: 1024px) and (hover: hover) and (pointer: fine)';
 const SLOW_CONNECTION_TYPES = new Set(['slow-2g', '2g']);
-const SPLINE_START_DELAY = 1200;
+const SPLINE_START_DELAY = 500;
 
 export default function Hero() {
     const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
