@@ -173,9 +173,6 @@
     flex-direction: column;
 }
 
-.project-card:not(.project-card-featured) {
-    display: none;
-}
 
 .project-card-active {
     border-color: rgba(201, 242, 91, 0.28);
