@@ -2,6 +2,45 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Projects.css';
 
+const projectImages = {
+    consultiq: {
+        src: '/consultiq.png',
+        srcSet: '/project-images/consultiq-480.webp 480w, /project-images/consultiq-720.webp 720w, /project-images/consultiq-1080.webp 1080w, /project-images/consultiq-1425.webp 1425w',
+        width: 1425,
+        height: 4507,
+    },
+    tiffanybleu: {
+        src: '/tiffanybleu.png',
+        srcSet: '/project-images/tiffanybleu-360.webp 360w, /project-images/tiffanybleu-640.webp 640w, /project-images/tiffanybleu-760.webp 760w',
+        width: 760,
+        height: 760,
+    },
+    dinnerhelp: {
+        src: '/dinnerhelp.png',
+        srcSet: '/project-images/dinnerhelp-480.webp 480w, /project-images/dinnerhelp-800.webp 800w, /project-images/dinnerhelp-1200.webp 1200w, /project-images/dinnerhelp-1600.webp 1600w',
+        width: 1916,
+        height: 940,
+    },
+    smartrestaurant: {
+        src: '/smartrestaurant.png',
+        srcSet: '/project-images/smartrestaurant-480.webp 480w, /project-images/smartrestaurant-800.webp 800w, /project-images/smartrestaurant-1200.webp 1200w, /project-images/smartrestaurant-1600.webp 1600w',
+        width: 1916,
+        height: 944,
+    },
+    erpnext: {
+        src: '/ERPNext.png',
+        srcSet: '/project-images/erpnext-259.webp 259w',
+        width: 259,
+        height: 194,
+    },
+};
+
+const imageSizes = {
+    dossier: '(max-width: 768px) calc(100vw - 2rem), (max-width: 1180px) 54vw, 640px',
+    featured: '(max-width: 768px) calc(100vw - 2rem), (max-width: 1180px) 52vw, 680px',
+    card: '(max-width: 768px) calc(100vw - 2rem), (max-width: 1180px) 50vw, 560px',
+};
+
 const projects = [
     {
         name: 'ConsultIQ',
@@ -11,7 +50,7 @@ const projects = [
         tags: ['Next.js 15', 'TypeScript', 'AI SDK', 'AI Workflows', 'Eval Harness', 'Governance'],
         live: 'https://consultiq.vercel.app',
         github: 'https://github.com/SalimFraj/consultiq',
-        image: '/consultiq.png',
+        image: projectImages.consultiq,
         featured: true,
         proof: [
             'Routes workflow requests through local tools before model synthesis.',
@@ -33,7 +72,7 @@ const projects = [
         tags: ['Next.js 15', 'TypeScript', 'Sanity CMS', 'React 19', 'ISR', 'Schema.org SEO'],
         live: 'https://www.tiffanybleu.ca',
         github: null,
-        image: '/tiffanybleu.png',
+        image: projectImages.tiffanybleu,
         isPrivate: true,
         caseFile: {
             problem: 'A real salon needed a site staff could keep current without developer support.',
@@ -49,7 +88,7 @@ const projects = [
         tags: ['React 19', 'TypeScript', 'Firebase', 'Groq AI', 'Zustand', 'PWA'],
         live: 'https://dinnerhelp.vercel.app',
         github: 'https://github.com/SalimFraj/dinnerhelp',
-        image: '/dinnerhelp.png',
+        image: projectImages.dinnerhelp,
         caseFile: {
             problem: 'Meal planning breaks down when pantry state, recipes, and shopping decisions live apart.',
             build: 'Built a PWA with AI recipe suggestions, barcode scanning, OCR, voice input, and sync.',
@@ -64,7 +103,7 @@ const projects = [
         tags: ['React', 'Node.js', 'JWT Auth', 'Docker', 'REST API', 'i18n'],
         live: 'https://smart-restaurantvercel.vercel.app',
         github: 'https://github.com/SalimFraj/smart-restaurant',
-        image: '/smartrestaurant.png',
+        image: projectImages.smartrestaurant,
         caseFile: {
             problem: 'Restaurant teams need role-aware operations instead of disconnected admin screens.',
             build: 'Built auth, permissions, APIs, dashboards, Dockerized services, i18n, and an AI assistant.',
@@ -79,7 +118,7 @@ const projects = [
         tags: ['ERPNext v15', 'Frappe Cloud', 'SQL', 'Batch Tracking', 'Manufacturing', 'Client Delivery'],
         live: null,
         github: null,
-        image: '/ERPNext.png',
+        image: projectImages.erpnext,
         isPrivate: true,
         caseFile: {
             problem: 'Inventory, manufacturing, warehouses, batches, and BOMs needed one operating system.',
@@ -95,6 +134,33 @@ const fadeInUp = {
     viewport: { once: true, margin: '-50px' },
     transition: { duration: 0.6 },
 };
+
+function ProjectImage({ project, variant = 'card', alt }) {
+    const image = project.image;
+    if (!image) return null;
+
+    const sizes = imageSizes[variant] || imageSizes.card;
+
+    return (
+        <picture>
+            <source srcSet={image.srcSet} sizes={sizes} type="image/webp" />
+            <img
+                src={image.src}
+                width={image.width}
+                height={image.height}
+                sizes={sizes}
+                loading="lazy"
+                decoding="async"
+                alt={alt}
+                onError={(event) => {
+                    const imageFrame = event.currentTarget.closest('.project-image, .dossier-screen');
+                    event.currentTarget.style.display = 'none';
+                    imageFrame?.querySelector('.project-image-fallback')?.style.setProperty('display', 'flex');
+                }}
+            />
+        </picture>
+    );
+}
 
 function ProjectActions({ project, compact = false }) {
     return (
@@ -169,7 +235,10 @@ function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) 
                 aria-labelledby={`project-tab-${activeProject}`}
             >
                 <div className="dossier-screen">
-                    <img src={selectedProject.image} alt={`${selectedProject.name} preview`} />
+                    <ProjectImage project={selectedProject} variant="dossier" alt={`${selectedProject.name} preview`} />
+                    <div className="project-image-fallback" style={{ display: 'none' }}>
+                        <span className="project-image-placeholder">{selectedProject.name.split(' ').map((word) => word[0]).join('').slice(0, 3)}</span>
+                    </div>
                 </div>
                 <div className="dossier-copy">
                     <p className="project-kicker">{selectedProject.kicker}</p>
@@ -222,13 +291,10 @@ export default function Projects() {
                             >
                             <div className="project-image">
                                 {project.image ? (
-                                    <img
-                                        src={project.image}
+                                    <ProjectImage
+                                        project={project}
+                                        variant={project.featured ? 'featured' : 'card'}
                                         alt={`${project.name} screenshot`}
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                            e.target.parentElement.querySelector('.project-image-fallback').style.display = 'flex';
-                                        }}
                                     />
                                 ) : null}
                                 <div className="project-image-fallback" style={{ display: project.image ? 'none' : 'flex' }}>
