@@ -123,16 +123,65 @@ const consultStages = [
     },
 ];
 
+function ProjectActions({ project, compact = false }) {
+    return (
+        <div className={`project-actions ${compact ? 'project-actions-compact' : ''}`} aria-label={`${project.name} links`}>
+            {project.live ? (
+                <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    {project.isPrivate ? 'Live Site' : 'Live Demo'}
+                </a>
+            ) : (
+                <span>Client Handoff</span>
+            )}
+            {project.github ? (
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            ) : (
+                <span>{project.isPrivate ? 'Case File' : 'No Repo'}</span>
+            )}
+        </div>
+    );
+}
+
 function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) {
+    const panelId = `project-panel-${activeProject}`;
+
+    const handleTabKeyDown = (event, index) => {
+        if (!['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+
+        event.preventDefault();
+
+        const direction = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : -1;
+        let nextIndex = index;
+
+        if (event.key === 'Home') {
+            nextIndex = 0;
+        } else if (event.key === 'End') {
+            nextIndex = projects.length - 1;
+        } else {
+            nextIndex = (index + direction + projects.length) % projects.length;
+        }
+
+        onSelect(nextIndex);
+        event.currentTarget.parentElement?.querySelectorAll('[role="tab"]')[nextIndex]?.focus();
+    };
+
     return (
         <motion.div className="project-dossier glass-card animated-border" {...fadeInUp} transition={{ duration: 0.6, delay: 0.16 }}>
-            <div className="project-dossier-tabs" aria-label="Project dossier selector">
+            <div className="project-dossier-tabs" aria-label="Project dossier selector" role="tablist">
                 {projects.map((project, index) => (
                     <button
                         className={`dossier-tab ${activeProject === index ? 'dossier-tab-active' : ''}`}
                         type="button"
                         key={project.name}
+                        id={`project-tab-${index}`}
+                        role="tab"
+                        aria-selected={activeProject === index}
+                        aria-controls={activeProject === index ? panelId : `project-panel-${index}`}
+                        tabIndex={activeProject === index ? 0 : -1}
                         onClick={() => onSelect(index)}
+                        onKeyDown={(event) => handleTabKeyDown(event, index)}
                     >
                         <span>{String(index + 1).padStart(2, '0')}</span>
                         {project.name}
@@ -140,7 +189,12 @@ function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) 
                 ))}
             </div>
 
-            <div className="project-dossier-preview">
+            <div
+                className="project-dossier-preview"
+                id={panelId}
+                role="tabpanel"
+                aria-labelledby={`project-tab-${activeProject}`}
+            >
                 <div className="dossier-screen">
                     <img src={selectedProject.image} alt={`${selectedProject.name} preview`} />
                 </div>
@@ -148,6 +202,7 @@ function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) 
                     <p className="project-kicker">{selectedProject.kicker}</p>
                     <h3>{selectedProject.name}</h3>
                     <p>{selectedProject.impact}</p>
+                    <ProjectActions project={selectedProject} compact />
                     <div className="dossier-proof-grid">
                         <div>
                             <span>Problem</span>
@@ -167,13 +222,12 @@ function ProjectDossier({ projects, activeProject, selectedProject, onSelect }) 
         </motion.div>
     );
 }
-
 function ConsultTheater() {
     const [activeStage, setActiveStage] = useState(0);
     const stage = consultStages[activeStage];
 
     return (
-        <motion.div className="consult-theater" {...fadeInUp} transition={{ duration: 0.6, delay: 0.22 }}>
+        <div className="consult-theater">
             <div className="consult-device">
                 <div className="consult-device-bar">
                     <span />
@@ -186,7 +240,7 @@ function ConsultTheater() {
                 </div>
             </div>
 
-            <div className="consult-stage-panel glass-card">
+            <div className="consult-stage-panel glass-card" id="consultiq-stage-panel" role="region" aria-live="polite" aria-label="Active ConsultIQ workflow stage">
                 <div className="consult-stage-header">
                     <span>ConsultIQ flow</span>
                     <code>{stage.meta}</code>
@@ -204,6 +258,8 @@ function ConsultTheater() {
                             className={`consult-stage-step ${activeStage === index ? 'consult-stage-step-active' : ''}`}
                             type="button"
                             key={item.label}
+                            aria-pressed={activeStage === index}
+                            aria-controls="consultiq-stage-panel"
                             onClick={() => setActiveStage(index)}
                             onMouseEnter={() => setActiveStage(index)}
                         >
@@ -213,7 +269,7 @@ function ConsultTheater() {
                     ))}
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }
 
@@ -243,12 +299,6 @@ export default function Projects() {
                         <motion.div
                             className={`project-card glass-card animated-border ${project.featured ? 'project-card-featured' : ''} ${activeProject === i ? 'project-card-active' : ''}`}
                             key={project.name}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ duration: 0.6, delay: i * 0.15 }}
-                            onMouseEnter={() => setActiveProject(i)}
-                            onFocus={() => setActiveProject(i)}
                             >
                             <div className="project-image">
                                 {project.image ? (
@@ -267,24 +317,17 @@ export default function Projects() {
                                     </span>
                                 </div>
                                 {project.isPrivate && !project.live ? (
-                                    <div className="project-overlay project-overlay-private">
+                                    <div className="project-overlay project-overlay-private" aria-hidden="true">
                                         <span className="project-private-badge">Handoff case file</span>
                                     </div>
                                 ) : project.isPrivate && project.live ? (
-                                    <div className="project-overlay">
-                                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
-                                            Live Site ↗
-                                        </a>
-                                        <span className="project-overlay-btn project-overlay-private-badge">Case File</span>
+                                    <div className="project-overlay" aria-hidden="true">
+                                        <span className="project-overlay-btn">Live site below</span>
+                                        <span className="project-overlay-btn project-overlay-private-badge">Case file</span>
                                     </div>
                                 ) : (
-                                    <div className="project-overlay">
-                                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
-                                            Live Demo ↗
-                                        </a>
-                                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-overlay-btn">
-                                            GitHub ↗
-                                        </a>
+                                    <div className="project-overlay" aria-hidden="true">
+                                        <span className="project-overlay-btn">Links below</span>
                                     </div>
                                 )}
                             </div>
@@ -312,11 +355,11 @@ export default function Projects() {
                                         </ul>
                                     </div>
                                 ) : null}
-                                <div className="case-file" aria-label={`${project.name} case file`}>
-                                    <div className="case-file-header">
+                                <details className="case-file" aria-label={`${project.name} case file`}>
+                                    <summary className="case-file-header">
                                         <span>Case file</span>
                                         <code>{project.isPrivate ? 'handoff' : 'live'}</code>
-                                    </div>
+                                    </summary>
                                     <div className="case-file-grid">
                                         <div>
                                             <strong>Problem</strong>
@@ -331,23 +374,8 @@ export default function Projects() {
                                             <p>{project.caseFile.handoff}</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="project-actions" aria-label={`${project.name} links`}>
-                                    {project.live ? (
-                                        <a href={project.live} target="_blank" rel="noopener noreferrer">
-                                            {project.isPrivate ? 'Live Site' : 'Live Demo'}
-                                        </a>
-                                    ) : (
-                                        <span>Client Handoff</span>
-                                    )}
-                                    {project.github ? (
-                                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                            GitHub
-                                        </a>
-                                    ) : (
-                                        <span>{project.isPrivate ? 'Case File' : 'No Repo'}</span>
-                                    )}
-                                </div>
+                                </details>
+                                <ProjectActions project={project} />
                                 <div className="project-tags">
                                     {project.tags.map((tag) => (
                                         <span className="project-tag" key={tag}>{tag}</span>

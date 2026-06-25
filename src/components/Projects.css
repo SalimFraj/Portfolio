@@ -442,6 +442,7 @@
     opacity: 0;
     z-index: 2;
     transition: var(--transition);
+    pointer-events: none;
 }
 
 .project-card:hover .project-overlay {
@@ -458,6 +459,7 @@
     background: var(--bg-glass);
     border: 1px solid var(--border-glass);
     transition: var(--transition);
+    pointer-events: none;
 }
 
 .project-overlay-btn:hover {
@@ -499,7 +501,6 @@
     font-size: var(--font-size-sm);
     line-height: 1.7;
     margin-bottom: 0.9rem;
-    flex: 1;
 }
 
 .project-impact {
@@ -588,16 +589,10 @@
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: var(--radius-sm);
     background: rgba(0, 0, 0, 0.16);
-    transform: translateY(8px);
-    max-height: 46px;
-    overflow: hidden;
-    transition: max-height 0.45s ease, transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    transition: border-color 0.35s ease, background 0.35s ease;
 }
 
-.project-card:hover .case-file,
-.project-card:focus-within .case-file {
-    max-height: 420px;
-    transform: translateY(0);
+.case-file[open] {
     border-color: rgba(201, 242, 91, 0.2);
     background:
         linear-gradient(135deg, rgba(201, 242, 91, 0.07), transparent),
@@ -610,6 +605,23 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.case-file-header::-webkit-details-marker {
+    display: none;
+}
+
+.case-file-header::after {
+    content: '+';
+    color: var(--text-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: 900;
+}
+
+.case-file[open] .case-file-header::after {
+    content: '-';
 }
 
 .case-file-header span {
@@ -658,6 +670,11 @@
     margin-bottom: 1.15rem;
     position: relative;
     z-index: 2;
+}
+
+
+.project-actions-compact {
+    margin-bottom: 1rem;
 }
 
 .project-actions a,
@@ -756,18 +773,9 @@
         min-height: 260px;
     }
 
-    .consult-device {
-        height: auto;
-        min-height: 260px;
-    }
-
-    .consult-device-screen {
-        height: 260px;
-        min-height: 222px;
-    }
-
+    .consult-theater,
     .projects-grid {
-        grid-template-columns: 1fr;
+        display: none;
     }
 
     .project-card-featured {
@@ -787,10 +795,5 @@
 
     .eval-trace {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .case-file {
-        max-height: none;
-        transform: none;
     }
 }

@@ -155,8 +155,20 @@
 
 @media (max-width: 640px) {
     .command-trigger {
-        right: 0.85rem;
-        bottom: 4.9rem;
+        right: 3.95rem;
+        bottom: 1rem;
+        width: 42px;
+        min-height: 42px;
+        padding: 0;
+    }
+
+    .command-trigger span {
+        font-size: 0;
+    }
+
+    .command-trigger span::before {
+        content: '/';
+        font-size: var(--font-size-sm);
     }
 
     .command-overlay {

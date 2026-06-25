@@ -1,10 +1,28 @@
-import { Suspense, lazy, useCallback } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
 export default function Hero() {
+    const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+
+    useEffect(() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isCompactViewport = window.matchMedia('(max-width: 768px)').matches;
+
+        if (prefersReducedMotion || isCompactViewport) return undefined;
+
+        const loadSpline = () => setShouldLoadSpline(true);
+        const idleCallback = window.requestIdleCallback?.(loadSpline, { timeout: 1600 });
+        const timeoutId = window.requestIdleCallback ? null : window.setTimeout(loadSpline, 900);
+
+        return () => {
+            if (idleCallback) window.cancelIdleCallback?.(idleCallback);
+            if (timeoutId) window.clearTimeout(timeoutId);
+        };
+    }, []);
+
     const handleHeroPointerMove = useCallback((event) => {
         if (!event.isTrusted) return;
 
@@ -42,12 +60,16 @@ export default function Hero() {
             </div>
 
             <div className="hero-spline-stage" aria-hidden="true">
-                <Suspense fallback={<div className="spline-fallback" />}>
-                    <Spline
-                        scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                        className="spline-scene"
-                    />
-                </Suspense>
+                {shouldLoadSpline ? (
+                    <Suspense fallback={<div className="spline-fallback" />}>
+                        <Spline
+                            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                            className="spline-scene"
+                        />
+                    </Suspense>
+                ) : (
+                    <div className="spline-fallback" />
+                )}
             </div>
 
             <div className="hero-content">
